@@ -5,6 +5,7 @@ import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:rd_hooks/dialog_hook.dart';
 import 'package:rd_hooks/use_app_lifecycle.dart';
 import 'package:rd_hooks/use_internet_connectivity.dart';
 
@@ -16,6 +17,7 @@ class Dashboard extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dialogController = useDialogController();
 
     useAppLifecycle((event) {
       if (event == LifecycleEvent.onResume) {
@@ -42,6 +44,22 @@ class Dashboard extends HookWidget {
 
     return Scaffold(
         appBar: AppBar(title: Text('RD Hooks')),
-        body: Container(child: Text('test'),));
+        body: Container(
+          alignment: Alignment.center,
+          child: Column(
+          children: <Widget>[
+            RaisedButton(
+              child: Text('Dialog'),
+              color: Colors.blue,
+              onPressed: () {
+                dialogController.showAlertDialog(
+                  title: Text('Title'),
+                  content: Text('Content'),
+                );
+              },
+            )
+          ],
+
+        ),));
   }
 }
