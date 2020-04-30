@@ -4,12 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:connectivity/connectivity.dart';
 
-/// Provides access to a callback that triggers whenever the lifecycle state
-/// changes. This will always trigger the first time with Lifecycle.onResume.
 ///
-/// This hook will also return the the current app lifecycle state.
+/// This hook will also return the the current app internet state.
 ///
-/// useAppLifecycle((event) => <do something with event>);
+/// useInternetConnectivity((result) => <do something with event>);
 ConnectivityResult useInternetConnectivity(Function(ConnectivityResult result) lifecycleCallback,
     [List<Object> keys = const <dynamic>[]]) {
   return Hook.use(_InternetConnectivityHook(
