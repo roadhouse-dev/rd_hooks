@@ -12,7 +12,7 @@ This is a flutter package that contains several hooks to speed up development.
       }
     });
 ```
-2. _InternetConnectivityHook: 
+2. _InternetConnectivityHook: Monitor connectivity status.
 ```dart
     useInternetConnectivity((result) {
       switch (result) {
@@ -30,4 +30,14 @@ This is a flutter package that contains several hooks to speed up development.
           break;
       }
     });
+```
+3. __DialogControllerHook: Help you create pop up alert or confirmation dialog.
+
+Alert dialog:
+```dart
+    final dialogController = useDialogController();
+    dialogController.showAlertDialog(
+      title: Text('Title'),
+      content: Text('Content'),
+    );
 ```
