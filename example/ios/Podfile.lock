@@ -1,0 +1,47 @@
+PODS:
+  - connectivity (0.0.1):
+    - Flutter
+    - Reachability
+  - connectivity_macos (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+  - flutter_fimber (0.0.1):
+    - Flutter
+  - Reachability (3.2)
+  - wakelock (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - connectivity (from `.symlinks/plugins/connectivity/ios`)
+  - connectivity_macos (from `.symlinks/plugins/connectivity_macos/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_fimber (from `.symlinks/plugins/flutter_fimber/ios`)
+  - wakelock (from `.symlinks/plugins/wakelock/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Reachability
+
+EXTERNAL SOURCES:
+  connectivity:
+    :path: ".symlinks/plugins/connectivity/ios"
+  connectivity_macos:
+    :path: ".symlinks/plugins/connectivity_macos/ios"
+  Flutter:
+    :path: Flutter
+  flutter_fimber:
+    :path: ".symlinks/plugins/flutter_fimber/ios"
+  wakelock:
+    :path: ".symlinks/plugins/wakelock/ios"
+
+SPEC CHECKSUMS:
+  connectivity: 6e94255659cc86dcbef1d452ad3e0491bb1b3e75
+  connectivity_macos: e2e9731b6b22dda39eb1b128f6969d574460e191
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_fimber: 4a6b342666fecb329fca23143f4b72c46cdd8022
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  wakelock: 0d4a70faf8950410735e3f61fb15d517c8a6efc4
+
+PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
+
+COCOAPODS: 1.8.4
