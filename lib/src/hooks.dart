@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+///Creates a textEditingController
+///[initialText] cannot be null, and will populate the textEditingController
+///the first time it is created.
 TextEditingController useTextEditingController([String initialText]) {
   return useMemoized(() => _ExtendedTextEditingController(initialText));
 }
 
+///Creates a focusNode
+///Please see [FocusNode] for more details on the parameters.
 useFocusNode({
   String debugLabel,
   FocusOnKeyCallback onKey,
@@ -21,6 +26,8 @@ useFocusNode({
   ));
 }
 
+///Caches an instance of a complex object, and provides an onDispose method
+///for easy cleanup.\
 T useMemoizedWithDispose<T>(
     T Function() valueBuilder, Function(T value) onDispose,
     [List<Object> keys = const <dynamic>[]]) {
@@ -32,27 +39,13 @@ T useMemoizedWithDispose<T>(
 }
 
 class _FocusNodeHook extends Hook<FocusNode> {
-  /// This is a wrapper of FocusNode,
-  /// You can go into FocusNode source code to get more information.
 
-  /// The [debugLabel] is ignored on release builds.
   final String debugLabel;
-  /// Called if this focus node receives a key event while focused
+
   final FocusOnKeyCallback onKey;
-  /// If true, tells the focus traversal policy to skip over this node for
-  /// purposes of the traversal algorithm.
-  ///
-  /// This may be used to place nodes in the focus tree that may be focused, but
-  /// not traversed, allowing them to receive key events as part of the focus
-  /// chain, but not be traversed to via focus traversal.
-  ///
+
   final bool skipTraversal;
-  /// If true, this focus node may request the primary focus.
-  ///
-  /// Defaults to true.  Set to false if you want this node to do nothing when
-  /// [requestFocus] is called on it. Does not affect the children of this node,
-  /// and [hasFocus] can still return true if this node is the ancestor of a
-  /// node with primary focus.
+
   final bool canRequestFocus;
 
   _FocusNodeHook(
@@ -95,6 +88,8 @@ class _FocusNodeHookState extends HookState<FocusNode, _FocusNodeHook> {
   }
 }
 
+///A custom TextEditingController which stops value change triggers when
+///it currently already contains the text value.
 class _ExtendedTextEditingController extends TextEditingController {
   _ExtendedTextEditingController([String initialText])
       : super(text: initialText);
