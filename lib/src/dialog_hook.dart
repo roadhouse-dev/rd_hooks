@@ -111,16 +111,15 @@ class DialogController {
   ///  in their respective area
   ///  [positiveAction] and [negativeAction] must be provided and cannot be null.
   ///  [onDisplay] is a callback which is invoked prior to the dialog being displayed
-  ///  [onPositive] is a callback which is invoked on a postive action, just prior to
+  ///  [onPositive] is a callback which is invoked on a positive action, just prior to
   ///  the dialog being removed from screen.
-  ///  [onNegative] is a callback which is invoked on a postive action, just prior to
+  ///  [onNegative] is a callback which is invoked on a negative action, just prior to
   ///  the dialog being removed from screen.
   showConfirmationDialog({
     final Widget title,
     final Widget content,
-    final Widget positiveAction,
     @required final Widget negativeAction,
-    final Widget positiveAction,
+    @required final Widget positiveAction,
     Function onDisplay,
     Function onPositive,
     Function onNegative,
