@@ -31,7 +31,7 @@ This is a flutter package that contains several hooks to speed up development.
       }
     });
 ```
-3. __DialogControllerHook: Help you create pop up alert or confirmation dialog.
+3. _DialogControllerHook: Help you create pop up alert or confirmation dialog.
 
 Alert dialog:
 ```dart
@@ -40,4 +40,37 @@ Alert dialog:
       title: Text('Title'),
       content: Text('Content'),
     );
+```
+4. _ExtendedTextEditingController: TextField controller 
+
+```dart
+   final emailTextController = useTextEditingController();
+   emailTextController.text = "email";
+   TextField(controller: emailTextController)
+```
+
+5. __FocusNodeHook: obtain the keyboard focus and to handle keyboard events.
+
+```dart
+   final emailFocusNode = useFocusNode();
+   TextField(focusNode: emailFocusNode);
+```
+
+6. _MemoizedHook:
+```dart
+    final recorderService = useMemoizedWithDispose<RecorderService>(
+      () => RecorderService(),
+      (item) {
+        if (item.isRecording) {
+          item.cancelRecording();
+        }
+      },
+    );
+```
+
+7. _WakeLockControllerHook
+```dart
+    final wakeLockController = useWakeLockController();
+    wakeLockController.startWakeLock();
+
 ```
