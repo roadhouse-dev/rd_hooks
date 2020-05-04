@@ -42,6 +42,8 @@ class DialogController {
 
   DialogController(this.context);
 
+  ///Removes a visible dialog from the screen. If a dialog is not currently visible, 
+  ///this method will do nothing.
   dismissDialog([dynamic result]) {
     if (dialogContext != null) {
       Navigator.of(dialogContext).pop(result);
@@ -116,8 +118,9 @@ class DialogController {
   showConfirmationDialog({
     final Widget title,
     final Widget content,
-    @required final Widget positiveAction,
+    final Widget positiveAction,
     @required final Widget negativeAction,
+    final Widget positiveAction,
     Function onDisplay,
     Function onPositive,
     Function onNegative,
