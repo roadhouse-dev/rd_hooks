@@ -2,8 +2,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:example/page/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
-import 'package:rd_hooks/use_app_lifecycle.dart';
-import 'package:rd_hooks/use_internet_connectivity.dart';
 
 void main() => runApp(MyApp());
 
