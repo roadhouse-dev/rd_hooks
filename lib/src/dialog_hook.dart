@@ -12,7 +12,8 @@ DialogController useDialogController([List<Object> keys = const <dynamic>[]]) {
 }
 
 class _DialogControllerHook extends Hook<DialogController> {
-  _DialogControllerHook({List<Object> keys = const <dynamic>[]}) : super(keys: keys);
+  _DialogControllerHook({List<Object> keys = const <dynamic>[]})
+      : super(keys: keys);
 
   @override
   HookState<DialogController, Hook<DialogController>> createState() {
@@ -39,6 +40,7 @@ class DialogController {
 
   DialogController(this.context);
 
+  /// Remove the dialog from screen.
   dismissDialog([dynamic result]) {
     if (dialogContext != null) {
       Navigator.of(dialogContext).pop(result);
@@ -46,8 +48,11 @@ class DialogController {
     }
   }
 
-  ///  This is a dialog with one button. PositiveAction is the button.
-  ///  We can set title, content and button.
+  /// Creates and displays an alert dialog with a single button.
+  /// [title], [content] can be null.
+  /// [positiveAction] can be null, in which case an 'OK' text widget will be used.
+  /// The [onDisplay] callback method is called just prior to the dialog being displayed.
+  /// The [onDismissed] is called after then dialog is dismissed by the user, but just prior to it being removed from screen.
   showAlertDialog({
     final Widget title,
     final Widget content,
@@ -65,8 +70,8 @@ class DialogController {
       }
 
       Widget dismissAction;
-      if(positiveAction == null){
-        dismissAction =  Text(Strings.dialogOkTitle.toUpperCase());
+      if (positiveAction == null) {
+        dismissAction = Text(Strings.dialogOkTitle.toUpperCase());
       } else {
         dismissAction = positiveAction;
       }
@@ -95,14 +100,19 @@ class DialogController {
     });
   }
 
-  ///  This is a dialog with two buttons.
-  ///  PositiveAction is the button on the right,negativeAction is on the left.
-  ///  We can set title, content and  two button.
+  /// Creates and displays an confirmation dialog with two buttons.
+  /// [title], [content] can be null.
+  /// [negativeAction] can be null, in which case an 'Cancel' text widget will be used.
+  /// [positiveAction] can be null, in which case an 'OK' text widget will be used.
+  /// The [onDisplay] callback method is called just prior to the dialog being displayed.
+  ///   /// The [onNegative] is called after dialog is dismissed by the user select [negativeAction].
+  /// The [onPositive] is called after dialog is dismissed by the user select [positiveAction].
+
   showConfirmationDialog({
     final Widget title,
     final Widget content,
-    final Widget positiveAction,
     final Widget negativeAction,
+    final Widget positiveAction,
     Function onDisplay,
     Function onPositive,
     Function onNegative,
@@ -127,7 +137,9 @@ class DialogController {
             content: content,
             actions: <Widget>[
               FlatButton(
-                child: negativeAction,
+                child: negativeAction != null
+                    ? negativeAction
+                    : Text(Strings.dialogCancelTitle.toUpperCase()),
                 onPressed: () {
                   Navigator.of(context).pop();
                   dialogContext = null;
@@ -137,7 +149,9 @@ class DialogController {
                 },
               ),
               FlatButton(
-                child: positiveAction,
+                child: positiveAction != null
+                    ? positiveAction
+                    : Text(Strings.dialogOkTitle.toUpperCase()),
                 onPressed: () {
                   Navigator.of(context).pop();
                   dialogContext = null;
