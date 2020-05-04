@@ -4,8 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:connectivity/connectivity.dart';
 
-///
-/// This hook will also return the the current app internet state.
+/// This hook will return the the current app internet state.
 ///
 /// useInternetConnectivity((result) => <do something with event>);
 ConnectivityResult useInternetConnectivity(Function(ConnectivityResult result) lifecycleCallback,
@@ -54,8 +53,6 @@ class _InternetConnectivityHookState
 
   @override
   ConnectivityResult build(BuildContext context) {
-    //Fimber.d("ConnectivityResult build");
-
     return newConnectivityResult;
   }
 

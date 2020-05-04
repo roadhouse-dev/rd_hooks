@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'resource/strings.dart';
 
+///  Provide the hook for using dialog easily
+///  There are two types dialog, alert and confirmation dialog.
+
 DialogController useDialogController([List<Object> keys = const <dynamic>[]]) {
   return Hook.use(_DialogControllerHook(
     keys: keys,
@@ -43,6 +46,8 @@ class DialogController {
     }
   }
 
+  ///  This is a dialog with one button. PositiveAction is the button.
+  ///  We can set title, content and button.
   showAlertDialog({
     final Widget title,
     final Widget content,
@@ -90,54 +95,9 @@ class DialogController {
     });
   }
 
-
-  showTextFieldDialog({
-    final Widget title,
-    final Widget content,
-    final Widget positiveAction,
-    Function() onDisplay,
-    Function() onDismissed,
-  }) {
-    WidgetsBinding.instance.scheduleFrameCallback((_) {
-      if (dialogContext != null) {
-        dismissDialog();
-      }
-
-      if (onDisplay != null) {
-        onDisplay();
-      }
-
-      Widget dismissAction;
-      if(positiveAction == null){
-        dismissAction =  Text(Strings.dialogOkTitle.toUpperCase());
-      } else {
-        dismissAction = positiveAction;
-      }
-
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          dialogContext = context;
-          return AlertDialog(
-            title: title,
-            content: content,
-            actions: <Widget>[
-              FlatButton(
-                child: dismissAction,
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                  dialogContext = null;
-                  if (onDismissed != null) onDismissed();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    });
-  }
-
+  ///  This is a dialog with two buttons.
+  ///  PositiveAction is the button on the right,negativeAction is on the left.
+  ///  We can set title, content and  two button.
   showConfirmationDialog({
     final Widget title,
     final Widget content,
