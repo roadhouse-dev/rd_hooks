@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'resource/strings.dart';
 
-///  Provide the hook for using dialog easily
-///  There are two types dialog, alert and confirmation dialog.
-
+/// Creates a DialogController which can be used to build and display dialogs.
+/// The dialogs are displayed on the next frame so it is safe to show dialogs
+/// within a build method.
 DialogController useDialogController([List<Object> keys = const <dynamic>[]]) {
   return Hook.use(_DialogControllerHook(
     keys: keys,
@@ -12,7 +12,8 @@ DialogController useDialogController([List<Object> keys = const <dynamic>[]]) {
 }
 
 class _DialogControllerHook extends Hook<DialogController> {
-  _DialogControllerHook({List<Object> keys = const <dynamic>[]}) : super(keys: keys);
+  _DialogControllerHook({List<Object> keys = const <dynamic>[]})
+      : super(keys: keys);
 
   @override
   HookState<DialogController, Hook<DialogController>> createState() {
@@ -33,12 +34,16 @@ class _DialogControllerHookState
   }
 }
 
+///Provides an easy way to show and dismiss dialogs. The dialogs are shown
+///on the next frame so it's safe to show then from within a build method.
 class DialogController {
   final BuildContext context;
   BuildContext dialogContext;
 
   DialogController(this.context);
 
+  ///Removes a visible dialog from the screen. If a dialog is not currently visible, 
+  ///this method will do nothing.
   dismissDialog([dynamic result]) {
     if (dialogContext != null) {
       Navigator.of(dialogContext).pop(result);
@@ -46,8 +51,13 @@ class DialogController {
     }
   }
 
-  ///  This is a dialog with one button. PositiveAction is the button.
-  ///  We can set title, content and button.
+  ///Builds and displays an alert dialog (single action).
+  ///[title] and [content] can be null. In which case nothing will be displayed
+  ///in their respective area
+  ///[positiveAction] can be null. In which case an OK Text widget will be used.
+  ///[onDisplay] is a callback which is invoked prior to the dialog being displayed
+  ///[onDismissed] is a callback which is invoked on user dismissal, just prior to
+  ///the dialog being removed from screen.
   showAlertDialog({
     final Widget title,
     final Widget content,
@@ -65,8 +75,8 @@ class DialogController {
       }
 
       Widget dismissAction;
-      if(positiveAction == null){
-        dismissAction =  Text(Strings.dialogOkTitle.toUpperCase());
+      if (positiveAction == null) {
+        dismissAction = Text(Strings.dialogOkTitle.toUpperCase());
       } else {
         dismissAction = positiveAction;
       }
@@ -95,14 +105,21 @@ class DialogController {
     });
   }
 
-  ///  This is a dialog with two buttons.
-  ///  PositiveAction is the button on the right,negativeAction is on the left.
-  ///  We can set title, content and  two button.
+  ///  Builds and displays a dialog with two actions [positiveAction] and
+  ///  [negativeAction]
+  ///  [title] and [content] can be null. In which case nothing will be displayed
+  ///  in their respective area
+  ///  [positiveAction] and [negativeAction] must be provided and cannot be null.
+  ///  [onDisplay] is a callback which is invoked prior to the dialog being displayed
+  ///  [onPositive] is a callback which is invoked on a positive action, just prior to
+  ///  the dialog being removed from screen.
+  ///  [onNegative] is a callback which is invoked on a negative action, just prior to
+  ///  the dialog being removed from screen.
   showConfirmationDialog({
     final Widget title,
     final Widget content,
-    final Widget positiveAction,
-    final Widget negativeAction,
+    @required final Widget negativeAction,
+    @required final Widget positiveAction,
     Function onDisplay,
     Function onPositive,
     Function onNegative,

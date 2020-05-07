@@ -6,8 +6,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:rd_hooks/src/dialog_hook.dart';
-import 'package:rd_hooks/src/use_app_lifecycle.dart';
-import 'package:rd_hooks/src/use_internet_connectivity.dart';
+import 'package:rd_hooks/src/app_lifecycle_hook.dart';
+import 'package:rd_hooks/src/internet_connectivity_hook.dart';
 
 
 //part 'dashboard.g.dart';

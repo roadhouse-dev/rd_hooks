@@ -4,9 +4,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:connectivity/connectivity.dart';
 
-/// This hook will return the the current app internet state.
+/// Subscribes to internet connectivity callbacks
+///[lifecycleCallback] will be invoked when a change in internet connectivity
+///occurs. This cannot be null.
+///The result of this method will be the current Lifecycle state
 ///
-/// useInternetConnectivity((result) => <do something with event>);
+/// useInternetConnectivity((result) {
+///   switch(result) {
+///     case ConnectivityResult.wifi:
+///       break;
+///     case ConnectivityResult.mobile:
+///       break;
+///     case ConnectivityResult.none:
+///       break;
+///   }
+/// });
 ConnectivityResult useInternetConnectivity(Function(ConnectivityResult result) lifecycleCallback,
     [List<Object> keys = const <dynamic>[]]) {
   return Hook.use(_InternetConnectivityHook(
