@@ -49,14 +49,7 @@ Alert dialog:
    TextField(controller: emailTextController)
 ```
 
-5. __FocusNodeHook: obtain the keyboard focus and to handle keyboard events.
-
-```dart
-   final emailFocusNode = useFocusNode();
-   TextField(focusNode: emailFocusNode);
-```
-
-6. _MemoizedHook:
+5. _MemoizedHook:
 ```dart
     final recorderService = useMemoizedWithDispose<RecorderService>(
       () => RecorderService(),
@@ -68,7 +61,7 @@ Alert dialog:
     );
 ```
 
-7. _WakeLockControllerHook
+6. _WakeLockControllerHook
 ```dart
     final wakeLockController = useWakeLockController();
     wakeLockController.startWakeLock();
